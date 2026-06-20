@@ -6,6 +6,8 @@ import Layout from './components/Layout';
 import SignInPage from './features/auth/SignInPage';
 import SignUpPage from './features/auth/SignUpPage';
 import RecurringExpensesPage from './features/recurring-expenses/RecurringExpensesPage';
+import ProjectsPage from './features/projects/ProjectsPage';
+import ProjectDetailPage from './features/projects/ProjectDetailPage';
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,8 @@ export default function App() {
                                     <Layout>
                                         <Routes>
                                             <Route path="/" element={<Dashboard />} />
+                                            <Route path="/projects" element={<ProjectsPage />} />
+                                            <Route path="/projects/:id" element={<ProjectDetailPage />} />
                                             <Route path="/recurring-expenses" element={<RecurringExpensesPage />} />
                                             <Route path="*" element={<Navigate to="/" replace />} />
                                         </Routes>

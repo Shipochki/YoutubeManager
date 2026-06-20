@@ -16,6 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <span className="nav-brand">YouTube Tracker</span>
                 <div className="nav-links">
                     <NavLink to="/" end>Dashboard</NavLink>
+                    <NavLink to="/projects">Projects</NavLink>
                     <NavLink to="/recurring-expenses">Recurring Expenses</NavLink>
                 </div>
                 <button className="btn btn-ghost" onClick={handleSignOut}>Sign out</button>
