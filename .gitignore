@@ -1,0 +1,23 @@
+# Secrets & local config
+.env
+.env.local
+.env.*.local
+server/Api/appsettings.*.json
+!server/Api/appsettings.json
+!server/Api/appsettings.Development.json
+!server/Api/appsettings.Development.json.example
+
+# .NET build output
+server/**/bin/
+server/**/obj/
+*.user
+.vs/
+
+# Node / client
+client/node_modules/
+client/dist/
+client/.vite/
+
+# OS
+.DS_Store
+Thumbs.db
