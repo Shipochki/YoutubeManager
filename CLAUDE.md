@@ -148,7 +148,8 @@ multi-channel, team collaboration, forecasting. See brainstorm "Future Enhanceme
 | 1 | Auth — Supabase sign-in/sign-up, AuthContext, ProtectedRoute, .NET JWT Bearer, UsersController (get-or-create) | ✅ Done | `phase-1-auth` |
 | 2 | EF Core initial migration (InitialCreate — all 7 tables) | ✅ Done | `phase-1-auth` |
 | 3 | Recurring expenses CRUD — backend + frontend list/form/toggle | ✅ Done | `phase-3-recurring-expenses` |
-| 4–7 | Projects, Financials, Profitability, Dashboard | 🔲 Next | — |
+| 4 | Projects CRUD + shorts management | ✅ Done | `phase-4-projects` |
+| 5–7 | Financials, Profitability, Dashboard | 🔲 Next | — |
 
 **GitHub repo:** `https://github.com/Shipochki/YoutubeManager` (private)
 

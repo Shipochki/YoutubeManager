@@ -59,9 +59,14 @@
 
 ---
 
-## 🔲 Phase 4 — Projects (MVP step 3)
-- Backend: CRUD endpoints (`/api/projects`), status, target publish date, linked shorts
-- Frontend: project list (cards) + create/edit form
+## ✅ Phase 4 — Projects (MVP step 3)
+**Branch:** `phase-4-projects`
+
+- ✅ Backend: `ProjectDto` (with ShortsCount), `ProjectDetailDto`, `ShortDto`, `IProjectService`, `ProjectService`
+- ✅ Backend: `ProjectsController` — GET list, GET by id, POST, PUT, DELETE, POST `/shorts`, DELETE `/shorts/{id}`
+- ✅ Frontend: `ProjectsPage` — card grid with status badge (Draft/InProgress/Published/Archived), shorts count, dates
+- ✅ Frontend: `ProjectDetailPage` — project info, shorts add/remove, placeholder sections for Phase 5
+- ✅ Frontend: `ProjectForm` — modal for create/edit (title, status, target date, published date, description)
 
 ---
 
