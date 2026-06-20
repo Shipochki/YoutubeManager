@@ -36,18 +36,26 @@
 
 ---
 
-## 🔲 Phase 2 — Backend Foundation
-1. Run initial EF Core migration (`dotnet ef migrations add InitialCreate`)
-2. Apply migration to local MSSQL (`dotnet ef database update`)
-3. Verify schema matches domain model
+## ✅ Phase 2 — Backend Foundation
+**Branch:** `phase-1-auth` (migration added alongside auth work)
+
+1. ✅ Ran initial EF Core migration (`dotnet ef migrations add InitialCreate`)
+2. ✅ Applied migration to local MSSQL (`dotnet ef database update`)
+3. ✅ Schema verified — all 7 tables created with correct types, indexes, and cascades
 
 > Note: Domain entities and `AppDbContext` were completed in Phase 0. Phase 2 is now only the migration step.
 
 ---
 
-## 🔲 Phase 3 — Account Recurring Expenses (MVP step 2)
-- Backend: CRUD endpoints (`/api/recurring-expenses`), active/inactive toggle
-- Frontend: list + form UI
+## ✅ Phase 3 — Account Recurring Expenses (MVP step 2)
+**Branch:** `phase-3-recurring-expenses`
+
+- ✅ Backend: `RecurringExpenseDto`, `IRecurringExpenseService`, `RecurringExpenseService`
+- ✅ Backend: `RecurringExpensesController` — GET list, POST create, PUT update, PATCH toggle, DELETE
+- ✅ Frontend: `Layout` component with sticky nav and sign-out
+- ✅ Frontend: `RecurringExpensesPage` — list with active/inactive badge, monthly total summary
+- ✅ Frontend: `RecurringExpenseForm` — modal for create and edit
+- ✅ `api.ts` extended with `patch` method; `tslib` installed (Vite 8 rolldown fix)
 
 ---
 
