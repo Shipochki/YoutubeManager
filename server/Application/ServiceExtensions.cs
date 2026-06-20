@@ -10,6 +10,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IRecurringExpenseService, RecurringExpenseService>();
+        services.AddScoped<IProjectService, ProjectService>();
         return services;
     }
 }
