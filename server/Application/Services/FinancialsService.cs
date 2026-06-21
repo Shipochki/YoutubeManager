@@ -33,7 +33,7 @@ public class FinancialsService(AppDbContext db) : IFinancialsService
             Description = request.Description,
             Amount = request.Amount,
             Category = request.Category,
-            Date = request.Date.ToUniversalTime(),
+            Date = request.Date.Date,
             CreatedAt = DateTime.UtcNow,
         };
         db.ProjectExpenses.Add(expense);
@@ -77,7 +77,7 @@ public class FinancialsService(AppDbContext db) : IFinancialsService
             ProjectId = projectId,
             Source = request.Source,
             Amount = request.Amount,
-            Date = request.Date.ToUniversalTime(),
+            Date = request.Date.Date,
             Notes = request.Notes,
             CreatedAt = DateTime.UtcNow,
         };
@@ -122,7 +122,7 @@ public class FinancialsService(AppDbContext db) : IFinancialsService
             ProjectId = projectId,
             Category = request.Category,
             Hours = request.Hours,
-            Date = request.Date.ToUniversalTime(),
+            Date = request.Date.Date,
             Notes = request.Notes,
             CreatedAt = DateTime.UtcNow,
         };

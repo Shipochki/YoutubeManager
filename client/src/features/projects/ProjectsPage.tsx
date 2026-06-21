@@ -14,7 +14,8 @@ const STATUS_LABELS: Record<ProjectStatus, string> = {
 
 function formatDate(iso: string | null | undefined): string {
     if (!iso) return '—';
-    return new Date(iso).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    const [y, m, d] = iso.substring(0, 10).split('-').map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
 export default function ProjectsPage() {
