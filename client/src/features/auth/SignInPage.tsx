@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Play } from 'lucide-react';
 import { useAuth } from './AuthContext';
 
 export default function SignInPage() {
@@ -27,7 +28,14 @@ export default function SignInPage() {
     return (
         <div className="auth-page">
             <div className="auth-card">
-                <h1>Sign in</h1>
+                <div className="auth-logo">
+                    <div className="auth-logo-icon">
+                        <Play size={18} fill="white" strokeWidth={0} />
+                    </div>
+                    <span className="auth-logo-name">YT Tracker</span>
+                </div>
+                <h1>Welcome back</h1>
+                <p className="auth-subtitle">Sign in to your account to continue.</p>
                 <form onSubmit={handleSubmit}>
                     <label>
                         Email

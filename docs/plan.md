@@ -90,9 +90,26 @@
 
 ---
 
-## 🔲 Phase 7 — Project List & Channel Dashboard (MVP steps 8–9)
-- Project list with color-coded profit/loss cards
-- Dashboard: monthly recurring total, projects published this month, channel-level revenue/expenses
+## ✅ Phase 7 — Project List & Channel Dashboard (MVP steps 8–9)
+**Branch:** `phase-7-dashboard`
+
+- ✅ Project list cards with color-coded gross profit badge (green/red/neutral)
+- ✅ `DashboardPage` — monthly recurring total, published-this-month count, total projects/hours, channel financials (all-time revenue/expenses/gross profit), recently published list
+
+---
+
+## ✅ Phase 8 — UX/UI Overhaul
+**Branch:** `phase-8-ui`
+
+- ✅ Replaced top-nav with dark sidebar layout (`#18181b`) + light gray main area (`#f4f4f5`)
+- ✅ Added `lucide-react` icons (LayoutDashboard, Clapperboard, RefreshCw, LogOut, Play)
+- ✅ New design token system in `index.css`: purple accent (`#7c3aed`), shadows, profit colors
+- ✅ Complete rewrite of `App.css`: sidebar, auth card, buttons, badges, cards, forms, modals, profitability panel
+- ✅ Auth pages branded with Play icon logo, descriptive subtitle, focus-ring inputs
+- ✅ Sidebar shows user avatar (first letter), email, red-on-hover sign-out button
+- ✅ Project cards: lift-on-hover (`translateY(-1px)`), accent border on hover
+- ✅ Inline add-forms sit in a gray background container (visually distinct from list)
+- ✅ Fixed missing `import './App.css'` in `App.tsx` (styles were written but never loaded)
 
 ---
 
@@ -102,9 +119,10 @@
 |------|------|--------|
 | 0 | Bootstrap + Docker MSSQL | ✅ Done |
 | 1 | Auth (Supabase + .NET JWT) | ✅ Done |
-| 2 | EF Core initial migration | 🔲 |
-| 3 | Recurring expenses CRUD | 🔲 |
-| 4 | Projects CRUD | 🔲 |
-| 5 | Expenses, Revenue, Time logs | 🔲 |
-| 6 | Profitability calculations | 🔲 |
-| 7 | Project list + Dashboard | 🔲 |
+| 2 | EF Core initial migration | ✅ Done |
+| 3 | Recurring expenses CRUD | ✅ Done |
+| 4 | Projects CRUD | ✅ Done |
+| 5 | Expenses, Revenue, Time logs | ✅ Done |
+| 6 | Profitability calculations | ✅ Done |
+| 7 | Project list + Dashboard | ✅ Done |
+| 8 | UX/UI Overhaul | ✅ Done |
