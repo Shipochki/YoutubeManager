@@ -1,5 +1,23 @@
 namespace Application.DTOs;
 
+public record CategoryBreakdown(string Category, decimal Total);
+public record TimeBreakdown(string Category, decimal Hours);
+
+public record ProfitabilityDto(
+    decimal TotalRevenue,
+    decimal TotalDirectExpenses,
+    decimal GrossProfit,
+    decimal TotalHours,
+    decimal? RevenuePerHour,
+    decimal MonthlyRecurringTotal,
+    int PublishedProjectsThisMonth,
+    decimal AutoAllocatedRecurring,
+    decimal NetProfitAuto,
+    decimal? RoiAuto,
+    List<CategoryBreakdown> ExpensesByCategory,
+    List<TimeBreakdown> TimeByCategory
+);
+
 public record ProjectExpenseDto(
     int Id,
     string Description,

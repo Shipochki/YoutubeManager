@@ -143,6 +143,77 @@ public class FinancialsService(AppDbContext db) : IFinancialsService
         return true;
     }
 
+    // ── Profitability ─────────────────────────────────────────────────────────
+
+    public async Task<ProfitabilityDto?> GetProfitabilityAsync(int userId, int projectId)
+    {
+        var project = await db.Projects
+            .Include(p => p.Expenses)
+            .Include(p => p.RevenueEntries)
+            .Include(p => p.TimeLogs)
+            .FirstOrDefaultAsync(p => p.Id == projectId && p.UserId == userId);
+
+        if (project is null) return null;
+
+        var totalRevenue = project.RevenueEntries.Sum(r => r.Amount);
+        var totalDirectExpenses = project.Expenses.Sum(e => e.Amount);
+        var grossProfit = totalRevenue - totalDirectExpenses;
+        var totalHours = project.TimeLogs.Sum(t => t.Hours);
+        decimal? revenuePerHour = totalHours > 0 ? totalRevenue / totalHours : null;
+
+        var monthlyRecurringTotal = await db.RecurringExpenses
+            .Where(r => r.UserId == userId && r.IsActive)
+            .SumAsync(r => r.Amount);
+
+        int publishedProjectsThisMonth = 0;
+        decimal autoAllocatedRecurring = 0;
+
+        if (project.PublishedDate.HasValue)
+        {
+            var pub = project.PublishedDate.Value;
+            publishedProjectsThisMonth = await db.Projects.CountAsync(p =>
+                p.UserId == userId &&
+                p.Status == ProjectStatus.Published &&
+                p.PublishedDate.HasValue &&
+                p.PublishedDate.Value.Year == pub.Year &&
+                p.PublishedDate.Value.Month == pub.Month);
+
+            autoAllocatedRecurring = publishedProjectsThisMonth > 0
+                ? monthlyRecurringTotal / publishedProjectsThisMonth
+                : 0;
+        }
+
+        var netProfitAuto = grossProfit - autoAllocatedRecurring;
+        var totalCostAuto = totalDirectExpenses + autoAllocatedRecurring;
+        decimal? roiAuto = totalCostAuto > 0 ? netProfitAuto / totalCostAuto : null;
+
+        var expensesByCategory = project.Expenses
+            .GroupBy(e => e.Category)
+            .Select(g => new CategoryBreakdown(g.Key, g.Sum(e => e.Amount)))
+            .OrderByDescending(c => c.Total)
+            .ToList();
+
+        var timeByCategory = project.TimeLogs
+            .GroupBy(t => t.Category)
+            .Select(g => new TimeBreakdown(g.Key, g.Sum(t => t.Hours)))
+            .OrderByDescending(c => c.Hours)
+            .ToList();
+
+        return new ProfitabilityDto(
+            totalRevenue,
+            totalDirectExpenses,
+            grossProfit,
+            totalHours,
+            revenuePerHour,
+            monthlyRecurringTotal,
+            publishedProjectsThisMonth,
+            autoAllocatedRecurring,
+            netProfitAuto,
+            roiAuto,
+            expensesByCategory,
+            timeByCategory);
+    }
+
     // ── Helpers ───────────────────────────────────────────────────────────────
 
     private async Task<bool> ProjectOwnedAsync(int userId, int projectId) =>

@@ -15,4 +15,6 @@ public interface IFinancialsService
     Task<List<TimeLogDto>> GetTimeLogsAsync(int userId, int projectId);
     Task<TimeLogDto?> AddTimeLogAsync(int userId, int projectId, CreateTimeLogRequest request);
     Task<bool> DeleteTimeLogAsync(int userId, int projectId, int id);
+
+    Task<ProfitabilityDto?> GetProfitabilityAsync(int userId, int projectId);
 }

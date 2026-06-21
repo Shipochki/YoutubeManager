@@ -117,3 +117,28 @@ export interface CreateTimeLogRequest {
     date: string;
     notes: string | null;
 }
+
+export interface CategoryBreakdown {
+    category: string;
+    total: number;
+}
+
+export interface TimeBreakdown {
+    category: string;
+    hours: number;
+}
+
+export interface ProfitabilityData {
+    totalRevenue: number;
+    totalDirectExpenses: number;
+    grossProfit: number;
+    totalHours: number;
+    revenuePerHour: number | null;
+    monthlyRecurringTotal: number;
+    publishedProjectsThisMonth: number;
+    autoAllocatedRecurring: number;
+    netProfitAuto: number;
+    roiAuto: number | null;
+    expensesByCategory: CategoryBreakdown[];
+    timeByCategory: TimeBreakdown[];
+}

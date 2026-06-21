@@ -7,6 +7,7 @@ import type {
     ProjectExpense, CreateProjectExpenseRequest,
     RevenueEntry, CreateRevenueEntryRequest,
     TimeLog, CreateTimeLogRequest,
+    ProfitabilityData,
 } from '../../types';
 import ProjectForm from './ProjectForm';
 
@@ -93,6 +94,9 @@ export default function ProjectDetailPage() {
             {project.description && (
                 <p style={{ marginBottom: 32, color: 'var(--text)' }}>{project.description}</p>
             )}
+
+            {/* ── Profitability ── */}
+            <ProfitabilityPanel projectId={Number(id)} />
 
             {/* Shorts section */}
             <section className="detail-section">
@@ -205,11 +209,15 @@ function ExpensesSection({ projectId }: { projectId: number }) {
         queryFn: () => api.get<ProjectExpense[]>(`/api/projects/${projectId}/expenses`),
     });
 
+    const invalidateProfitability = () =>
+        queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'profitability'] });
+
     const addMutation = useMutation({
         mutationFn: (body: CreateProjectExpenseRequest) =>
             api.post<ProjectExpense>(`/api/projects/${projectId}/expenses`, body),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'expenses'] });
+            invalidateProfitability();
             setShowForm(false);
             setDesc(''); setAmount(''); setCategory(''); setDate('');
         },
@@ -217,7 +225,10 @@ function ExpensesSection({ projectId }: { projectId: number }) {
 
     const deleteMutation = useMutation({
         mutationFn: (id: number) => api.delete(`/api/projects/${projectId}/expenses/${id}`),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'expenses'] }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'expenses'] });
+            invalidateProfitability();
+        },
     });
 
     function handleSubmit(e: React.FormEvent) {
@@ -299,11 +310,15 @@ function RevenueSection({ projectId }: { projectId: number }) {
         queryFn: () => api.get<RevenueEntry[]>(`/api/projects/${projectId}/revenue`),
     });
 
+    const invalidateProfitability = () =>
+        queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'profitability'] });
+
     const addMutation = useMutation({
         mutationFn: (body: CreateRevenueEntryRequest) =>
             api.post<RevenueEntry>(`/api/projects/${projectId}/revenue`, body),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'revenue'] });
+            invalidateProfitability();
             setShowForm(false);
             setSource(''); setAmount(''); setDate(''); setNotes('');
         },
@@ -311,7 +326,10 @@ function RevenueSection({ projectId }: { projectId: number }) {
 
     const deleteMutation = useMutation({
         mutationFn: (id: number) => api.delete(`/api/projects/${projectId}/revenue/${id}`),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'revenue'] }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'revenue'] });
+            invalidateProfitability();
+        },
     });
 
     function handleSubmit(e: React.FormEvent) {
@@ -393,11 +411,15 @@ function TimeLogsSection({ projectId }: { projectId: number }) {
         queryFn: () => api.get<TimeLog[]>(`/api/projects/${projectId}/timelogs`),
     });
 
+    const invalidateProfitability = () =>
+        queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'profitability'] });
+
     const addMutation = useMutation({
         mutationFn: (body: CreateTimeLogRequest) =>
             api.post<TimeLog>(`/api/projects/${projectId}/timelogs`, body),
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'timelogs'] });
+            invalidateProfitability();
             setShowForm(false);
             setCategory(''); setHours(''); setDate(''); setNotes('');
         },
@@ -405,7 +427,10 @@ function TimeLogsSection({ projectId }: { projectId: number }) {
 
     const deleteMutation = useMutation({
         mutationFn: (id: number) => api.delete(`/api/projects/${projectId}/timelogs/${id}`),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'timelogs'] }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['projects', projectId, 'timelogs'] });
+            invalidateProfitability();
+        },
     });
 
     function handleSubmit(e: React.FormEvent) {
@@ -467,6 +492,163 @@ function TimeLogsSection({ projectId }: { projectId: number }) {
                         </li>
                     ))}
                 </ul>
+            )}
+        </section>
+    );
+}
+
+// ── Profitability Panel ──────────────────────────────────────────────────────
+
+function ProfitabilityPanel({ projectId }: { projectId: number }) {
+    const [manualAllocation, setManualAllocation] = useState('');
+
+    const { data: p, isLoading } = useQuery({
+        queryKey: ['projects', projectId, 'profitability'],
+        queryFn: () => api.get<ProfitabilityData>(`/api/projects/${projectId}/profitability`),
+    });
+
+    if (isLoading || !p) return null;
+
+    const hasData = p.totalRevenue > 0 || p.totalDirectExpenses > 0 || p.totalHours > 0;
+    if (!hasData) return null;
+
+    const manual = parseFloat(manualAllocation) || 0;
+    const netProfitManual = p.grossProfit - manual;
+    const totalCostManual = p.totalDirectExpenses + manual;
+    const roiManual = totalCostManual > 0 ? netProfitManual / totalCostManual : null;
+
+    function profitColor(val: number) {
+        if (val > 0) return 'var(--profit-positive)';
+        if (val < 0) return 'var(--profit-negative)';
+        return 'var(--text-h)';
+    }
+
+    function fmtMoney(val: number) {
+        const abs = Math.abs(val).toFixed(2);
+        return val < 0 ? `-$${abs}` : `$${abs}`;
+    }
+
+    function fmtRoi(val: number | null) {
+        if (val === null) return '—';
+        return `${(val * 100).toFixed(0)}%`;
+    }
+
+    return (
+        <section className="detail-section profitability-panel">
+            <div className="detail-section-header">
+                <h2>Profitability</h2>
+            </div>
+
+            <div className="metrics-grid">
+                <div className="metric-card">
+                    <div className="metric-label">Revenue</div>
+                    <div className="metric-value" style={{ color: 'var(--profit-positive)' }}>
+                        {fmtMoney(p.totalRevenue)}
+                    </div>
+                </div>
+                <div className="metric-card">
+                    <div className="metric-label">Direct Expenses</div>
+                    <div className="metric-value" style={{ color: p.totalDirectExpenses > 0 ? 'var(--profit-negative)' : 'var(--text-h)' }}>
+                        {fmtMoney(p.totalDirectExpenses)}
+                    </div>
+                </div>
+                <div className="metric-card">
+                    <div className="metric-label">Gross Profit</div>
+                    <div className="metric-value" style={{ color: profitColor(p.grossProfit) }}>
+                        {fmtMoney(p.grossProfit)}
+                    </div>
+                </div>
+                <div className="metric-card">
+                    <div className="metric-label">Total Hours</div>
+                    <div className="metric-value">{p.totalHours.toFixed(1)} hrs</div>
+                </div>
+                {p.revenuePerHour !== null && (
+                    <div className="metric-card">
+                        <div className="metric-label">Revenue / hr</div>
+                        <div className="metric-value">{fmtMoney(p.revenuePerHour)}</div>
+                    </div>
+                )}
+            </div>
+
+            <div className="allocation-section">
+                <div className="allocation-row">
+                    <div className="allocation-mode">
+                        <div className="allocation-label">Auto allocation</div>
+                        <div className="allocation-detail">
+                            {p.publishedProjectsThisMonth > 0
+                                ? `$${p.monthlyRecurringTotal.toFixed(2)} ÷ ${p.publishedProjectsThisMonth} projects = $${p.autoAllocatedRecurring.toFixed(2)}/project`
+                                : p.monthlyRecurringTotal > 0
+                                    ? 'Project not published — no auto allocation'
+                                    : 'No active recurring expenses'}
+                        </div>
+                    </div>
+                    <div className="allocation-results">
+                        <span className="alloc-result-label">Net Profit</span>
+                        <span className="alloc-result-value" style={{ color: profitColor(p.netProfitAuto) }}>
+                            {fmtMoney(p.netProfitAuto)}
+                        </span>
+                        <span className="alloc-result-label">ROI</span>
+                        <span className="alloc-result-value" style={{ color: profitColor(p.netProfitAuto) }}>
+                            {fmtRoi(p.roiAuto)}
+                        </span>
+                    </div>
+                </div>
+
+                <div className="allocation-row">
+                    <div className="allocation-mode">
+                        <div className="allocation-label">Manual allocation</div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 4 }}>
+                            <span style={{ color: 'var(--text)', fontSize: 14 }}>$</span>
+                            <input
+                                className="form-input"
+                                type="number"
+                                min="0"
+                                step="0.01"
+                                placeholder="Enter recurring amount…"
+                                value={manualAllocation}
+                                onChange={e => setManualAllocation(e.target.value)}
+                                style={{ maxWidth: 200 }}
+                            />
+                        </div>
+                    </div>
+                    <div className="allocation-results">
+                        <span className="alloc-result-label">Net Profit</span>
+                        <span className="alloc-result-value" style={{ color: profitColor(netProfitManual) }}>
+                            {fmtMoney(netProfitManual)}
+                        </span>
+                        <span className="alloc-result-label">ROI</span>
+                        <span className="alloc-result-value" style={{ color: profitColor(netProfitManual) }}>
+                            {fmtRoi(roiManual)}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            {(p.expensesByCategory.length > 0 || p.timeByCategory.length > 0) && (
+                <div className="breakdown-grid">
+                    {p.expensesByCategory.length > 0 && (
+                        <div className="breakdown-col">
+                            <div className="breakdown-title">Expenses by category</div>
+                            {p.expensesByCategory.map(c => (
+                                <div key={c.category} className="breakdown-row">
+                                    <span className="breakdown-cat">{c.category}</span>
+                                    <span className="breakdown-val">${c.total.toFixed(2)}</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    {p.timeByCategory.length > 0 && (
+                        <div className="breakdown-col">
+                            <div className="breakdown-title">Time by category</div>
+                            {p.timeByCategory.map(c => (
+                                <div key={c.category} className="breakdown-row">
+                                    <span className="breakdown-cat">{c.category}</span>
+                                    <span className="breakdown-val">{c.hours.toFixed(1)} hrs</span>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
             )}
         </section>
     );

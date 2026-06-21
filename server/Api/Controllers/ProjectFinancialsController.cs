@@ -84,6 +84,18 @@ public class ProjectFinancialsController(
         return NoContent();
     }
 
+    // ── Profitability ─────────────────────────────────────────────────────────
+
+    [HttpGet("profitability")]
+    public async Task<ActionResult<ProfitabilityDto>> GetProfitability(int projectId)
+    {
+        var userId = await GetUserIdAsync();
+        if (userId is null) return Unauthorized();
+        var result = await financialsService.GetProfitabilityAsync(userId.Value, projectId);
+        if (result is null) return NotFound();
+        return Ok(result);
+    }
+
     // ── Time Logs ─────────────────────────────────────────────────────────────
 
     [HttpGet("timelogs")]
