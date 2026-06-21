@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Play } from 'lucide-react';
 import { useAuth } from './AuthContext';
 
 export default function SignUpPage() {
@@ -33,6 +34,12 @@ export default function SignUpPage() {
         return (
             <div className="auth-page">
                 <div className="auth-card">
+                    <div className="auth-logo">
+                        <div className="auth-logo-icon">
+                            <Play size={18} fill="white" strokeWidth={0} />
+                        </div>
+                        <span className="auth-logo-name">YT Tracker</span>
+                    </div>
                     <h1>Check your email</h1>
                     <p>We sent a confirmation link to <strong>{email}</strong>. Click it to activate your account, then <Link to="/sign-in">sign in</Link>.</p>
                 </div>
@@ -43,7 +50,14 @@ export default function SignUpPage() {
     return (
         <div className="auth-page">
             <div className="auth-card">
+                <div className="auth-logo">
+                    <div className="auth-logo-icon">
+                        <Play size={18} fill="white" strokeWidth={0} />
+                    </div>
+                    <span className="auth-logo-name">YT Tracker</span>
+                </div>
                 <h1>Create account</h1>
+                <p className="auth-subtitle">Start tracking your YouTube economics.</p>
                 <form onSubmit={handleSubmit}>
                     <label>
                         Email

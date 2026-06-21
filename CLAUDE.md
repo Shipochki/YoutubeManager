@@ -151,7 +151,8 @@ multi-channel, team collaboration, forecasting. See brainstorm "Future Enhanceme
 | 4 | Projects CRUD + shorts management | ✅ Done | `phase-4-projects` |
 | 5 | Project Financials — expenses, revenue, time logs | ✅ Done | `phase-5-financials` |
 | 6 | Profitability Engine — gross/net profit, ROI, allocation modes | ✅ Done | `phase-6-profitability` |
-| 7 | Project list (color-coded) + Channel Dashboard | 🔲 Next | — |
+| 7 | Project list (color-coded) + Channel Dashboard | ✅ Done | `phase-7-dashboard` |
+| 8 | UX/UI Overhaul — sidebar layout, design tokens, polished components, icons | ✅ Done | `phase-8-ui` |
 
 **GitHub repo:** `https://github.com/Shipochki/YoutubeManager` (private)
 
