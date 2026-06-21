@@ -118,6 +118,12 @@ See [docs/plan.md](docs/plan.md) for the full phase-by-phase build plan and curr
   4. Recurring Expenses
      <img width="1917" height="911" alt="Screenshot 2026-06-21 121454" src="https://github.com/user-attachments/assets/fa3e3125-38e2-4ede-aaae-a9eb46060443" />
 
+  5. SignIn/SignUp
+     <img width="1915" height="911" alt="image" src="https://github.com/user-attachments/assets/e9b502dd-0643-45ef-90ab-02c18a6e7fbf" />
+     <img width="1917" height="909" alt="image" src="https://github.com/user-attachments/assets/8c9089c6-b309-47cd-ba98-0f985b751df5" />
+
+ 
+
 
 
 
