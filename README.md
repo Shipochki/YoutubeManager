@@ -101,3 +101,25 @@ docker-compose.yml      local MSSQL
 ## Development Plan
 
 See [docs/plan.md](docs/plan.md) for the full phase-by-phase build plan and current status.
+
+## Screenshots from the application
+  1. Dashboard
+     <img width="1917" height="909" alt="Screenshot 2026-06-21 121243" src="https://github.com/user-attachments/assets/1be9f589-dd12-4b93-88aa-ac00ed8cf906" />
+
+  2. Projects
+     <img width="1917" height="909" alt="Screenshot 2026-06-21 121251" src="https://github.com/user-attachments/assets/5eab7b9d-456c-43ca-81d3-3f098357a51c" />
+
+  3. Project Detail
+     <img width="1919" height="909" alt="Screenshot 2026-06-21 121301" src="https://github.com/user-attachments/assets/39a3640b-f9c9-40be-ac52-70d734220b18" />
+     <img width="1919" height="908" alt="Screenshot 2026-06-21 121329" src="https://github.com/user-attachments/assets/2ece5da7-8d78-4809-b474-328445e90c01" />
+     <img width="1919" height="909" alt="Screenshot 2026-06-21 121347" src="https://github.com/user-attachments/assets/5ff12f00-5239-4570-be4a-2e4f21962882" />
+     <img width="1919" height="911" alt="Screenshot 2026-06-21 121423" src="https://github.com/user-attachments/assets/0454f36d-9eba-4210-a4ac-58ac22847635" />
+
+  4. Recurring Expenses
+     <img width="1917" height="911" alt="Screenshot 2026-06-21 121454" src="https://github.com/user-attachments/assets/fa3e3125-38e2-4ede-aaae-a9eb46060443" />
+
+
+
+
+
+
