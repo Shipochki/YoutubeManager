@@ -475,6 +475,18 @@
   min-width: 140px;
 }
 
+/* ---- Project card profit badge ---- */
+.profit-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+}
+
+.profit-positive { color: var(--profit-positive); background: rgba(22,163,74,0.1); }
+.profit-negative { color: var(--profit-negative); background: rgba(220,38,38,0.1); }
+.profit-neutral  { color: var(--text); background: var(--surface2); }
+
 /* ---- Financials totals ---- */
 .financials-total {
   font-size: 14px;

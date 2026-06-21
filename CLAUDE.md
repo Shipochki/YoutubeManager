@@ -150,7 +150,8 @@ multi-channel, team collaboration, forecasting. See brainstorm "Future Enhanceme
 | 3 | Recurring expenses CRUD — backend + frontend list/form/toggle | ✅ Done | `phase-3-recurring-expenses` |
 | 4 | Projects CRUD + shorts management | ✅ Done | `phase-4-projects` |
 | 5 | Project Financials — expenses, revenue, time logs | ✅ Done | `phase-5-financials` |
-| 6–7 | Profitability Engine + Dashboard | 🔲 Next | — |
+| 6 | Profitability Engine — gross/net profit, ROI, allocation modes | ✅ Done | `phase-6-profitability` |
+| 7 | Project list (color-coded) + Channel Dashboard | 🔲 Next | — |
 
 **GitHub repo:** `https://github.com/Shipochki/YoutubeManager` (private)
 

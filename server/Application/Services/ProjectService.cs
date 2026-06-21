@@ -22,7 +22,9 @@ public class ProjectService(AppDbContext db) : IProjectService
                 p.PublishedDate,
                 p.CreatedAt,
                 p.UpdatedAt,
-                p.Shorts.Count))
+                p.Shorts.Count,
+                (p.RevenueEntries.Sum(r => (decimal?)r.Amount) ?? 0m) - (p.Expenses.Sum(e => (decimal?)e.Amount) ?? 0m),
+                p.TimeLogs.Sum(t => (decimal?)t.Hours) ?? 0m))
             .ToListAsync();
     }
 

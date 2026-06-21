@@ -12,6 +12,7 @@ public static class ServiceExtensions
         services.AddScoped<IRecurringExpenseService, RecurringExpenseService>();
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<IFinancialsService, FinancialsService>();
+        services.AddScoped<IDashboardService, DashboardService>();
         return services;
     }
 }

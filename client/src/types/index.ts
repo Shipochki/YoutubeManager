@@ -35,6 +35,28 @@ export interface Project {
     createdAt: string;
     updatedAt: string;
     shortsCount: number;
+    grossProfit: number;
+    totalHours: number;
+}
+
+export interface DashboardProjectDto {
+    id: number;
+    title: string;
+    status: string;
+    publishedDate: string | null;
+    grossProfit: number;
+    totalHours: number;
+}
+
+export interface DashboardData {
+    monthlyRecurringTotal: number;
+    publishedProjectsThisMonth: number;
+    totalProjects: number;
+    totalRevenue: number;
+    totalDirectExpenses: number;
+    totalGrossProfit: number;
+    totalHours: number;
+    recentProjects: DashboardProjectDto[];
 }
 
 export interface Short {

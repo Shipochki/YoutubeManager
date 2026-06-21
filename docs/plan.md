@@ -80,10 +80,13 @@
 
 ---
 
-## 🔲 Phase 6 — Profitability Engine (MVP step 7)
-- `Application` service computes: Gross Profit, Net Profit, ROI, Revenue per Hour
-- Two recurring-cost allocation modes: manual amount vs. auto-split by published projects that month
-- Project detail view surfaces all metrics + breakdowns
+## ✅ Phase 6 — Profitability Engine (MVP step 7)
+**Branch:** `phase-6-profitability`
+
+- ✅ Backend: `ProfitabilityDto` (with `CategoryBreakdown`, `TimeBreakdown`), `GetProfitabilityAsync` in `FinancialsService`
+- ✅ Backend: `GET /api/projects/{id}/profitability` — gross profit, net profit, ROI, revenue/hr, auto recurring split, breakdowns
+- ✅ Frontend: `ProfitabilityPanel` — metric cards, auto/manual allocation rows (manual recalculates live client-side), expense + time breakdowns by category
+- ✅ CSS: `--profit-positive/negative` vars, `.metrics-grid`, `.metric-card`, `.allocation-section`, `.breakdown-grid`
 
 ---
 

@@ -99,6 +99,11 @@ export default function ProjectsPage() {
                                 ) : (
                                     <span>No target date</span>
                                 )}
+                                {(project.grossProfit !== 0 || project.totalHours > 0) && (
+                                    <span className={`profit-badge ${project.grossProfit > 0 ? 'profit-positive' : project.grossProfit < 0 ? 'profit-negative' : 'profit-neutral'}`}>
+                                        {project.grossProfit >= 0 ? '+' : ''}${project.grossProfit.toFixed(2)}
+                                    </span>
+                                )}
                             </div>
                             <div className="project-card-actions">
                                 <button
