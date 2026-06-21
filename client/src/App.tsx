@@ -8,19 +8,9 @@ import SignUpPage from './features/auth/SignUpPage';
 import RecurringExpensesPage from './features/recurring-expenses/RecurringExpensesPage';
 import ProjectsPage from './features/projects/ProjectsPage';
 import ProjectDetailPage from './features/projects/ProjectDetailPage';
+import DashboardPage from './features/dashboard/DashboardPage';
 
 const queryClient = new QueryClient();
-
-function Dashboard() {
-    return (
-        <div>
-            <div className="page-header">
-                <h1>Dashboard</h1>
-            </div>
-            <p>Channel overview coming in Phase 7.</p>
-        </div>
-    );
-}
 
 export default function App() {
     return (
@@ -36,7 +26,7 @@ export default function App() {
                                 <ProtectedRoute>
                                     <Layout>
                                         <Routes>
-                                            <Route path="/" element={<Dashboard />} />
+                                            <Route path="/" element={<DashboardPage />} />
                                             <Route path="/projects" element={<ProjectsPage />} />
                                             <Route path="/projects/:id" element={<ProjectDetailPage />} />
                                             <Route path="/recurring-expenses" element={<RecurringExpensesPage />} />

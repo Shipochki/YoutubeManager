@@ -17,7 +17,9 @@ public record ProjectDto(
     DateTime? PublishedDate,
     DateTime CreatedAt,
     DateTime UpdatedAt,
-    int ShortsCount
+    int ShortsCount,
+    decimal GrossProfit,
+    decimal TotalHours
 );
 
 public record ProjectDetailDto(

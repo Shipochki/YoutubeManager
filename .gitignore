@@ -4,7 +4,6 @@
 .env.*.local
 server/Api/appsettings.*.json
 !server/Api/appsettings.json
-!server/Api/appsettings.Development.json
 !server/Api/appsettings.Development.json.example
 
 # .NET build output
