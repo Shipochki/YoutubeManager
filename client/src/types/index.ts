@@ -69,3 +69,51 @@ export interface CreateShortRequest {
     youtubeUrl: string | null;
     publishedDate: string | null;
 }
+
+export interface ProjectExpense {
+    id: number;
+    description: string;
+    amount: number;
+    category: string;
+    date: string;
+    createdAt: string;
+}
+
+export interface CreateProjectExpenseRequest {
+    description: string;
+    amount: number;
+    category: string;
+    date: string;
+}
+
+export interface RevenueEntry {
+    id: number;
+    source: string;
+    amount: number;
+    date: string;
+    notes: string | null;
+    createdAt: string;
+}
+
+export interface CreateRevenueEntryRequest {
+    source: string;
+    amount: number;
+    date: string;
+    notes: string | null;
+}
+
+export interface TimeLog {
+    id: number;
+    category: string;
+    hours: number;
+    date: string;
+    notes: string | null;
+    createdAt: string;
+}
+
+export interface CreateTimeLogRequest {
+    category: string;
+    hours: number;
+    date: string;
+    notes: string | null;
+}

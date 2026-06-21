@@ -474,3 +474,18 @@
   flex: 1;
   min-width: 140px;
 }
+
+/* ---- Financials totals ---- */
+.financials-total {
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 10px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: var(--surface2);
+  color: var(--text-h);
+}
+
+.expense-total { color: #ef4444; background: rgba(239,68,68,0.08); }
+.revenue-total { color: #22c55e; background: rgba(34,197,94,0.08); }
+.revenue-amount { color: #22c55e; }
