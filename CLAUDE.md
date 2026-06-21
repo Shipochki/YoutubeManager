@@ -149,7 +149,8 @@ multi-channel, team collaboration, forecasting. See brainstorm "Future Enhanceme
 | 2 | EF Core initial migration (InitialCreate — all 7 tables) | ✅ Done | `phase-1-auth` |
 | 3 | Recurring expenses CRUD — backend + frontend list/form/toggle | ✅ Done | `phase-3-recurring-expenses` |
 | 4 | Projects CRUD + shorts management | ✅ Done | `phase-4-projects` |
-| 5–7 | Financials, Profitability, Dashboard | 🔲 Next | — |
+| 5 | Project Financials — expenses, revenue, time logs | ✅ Done | `phase-5-financials` |
+| 6–7 | Profitability Engine + Dashboard | 🔲 Next | — |
 
 **GitHub repo:** `https://github.com/Shipochki/YoutubeManager` (private)
 

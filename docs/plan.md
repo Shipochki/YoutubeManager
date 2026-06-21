@@ -70,11 +70,13 @@
 
 ---
 
-## 🔲 Phase 5 — Project Financials (MVP steps 4–6)
-- **Expenses**: line items (description, amount, category)
-- **Revenue**: payout entries (source, amount, date)
-- **Time logs**: hours by category
-- All three as sub-resources of a project (`/api/projects/{id}/expenses`, etc.)
+## ✅ Phase 5 — Project Financials (MVP steps 4–6)
+**Branch:** `phase-5-financials`
+
+- ✅ Backend: `FinancialsDto` (ProjectExpense/RevenueEntry/TimeLog DTOs + create requests), `IFinancialsService`, `FinancialsService`
+- ✅ Backend: `ProjectFinancialsController` — GET/POST/DELETE for `/expenses`, `/revenue`, `/timelogs` under `api/projects/{projectId}`
+- ✅ Frontend: `ExpensesSection`, `RevenueSection`, `TimeLogsSection` components in `ProjectDetailPage` — inline add forms, running totals, remove per entry
+- ✅ CSS: `.financials-total`, `.expense-total` (red), `.revenue-total`/`.revenue-amount` (green)
 
 ---
 
