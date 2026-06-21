@@ -1,9 +1,18 @@
 {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "Microsoft.AspNetCore": "Information"
+    }
+  },
   "ConnectionStrings": {
     "DefaultConnection": "Server=localhost,1433;Database=YoutubeManager;User Id=sa;Password=YourStrong!Password;TrustServerCertificate=true"
   },
   "Jwt": {
-    "Authority": "https://<your-supabase-project-ref>.supabase.co",
+    "Authority": "https://<your-supabase-project-ref>.supabase.co/auth/v1",
     "Audience": "authenticated"
+  },
+  "Cors": {
+    "AllowedOrigins": [ "http://localhost:5173" ]
   }
 }

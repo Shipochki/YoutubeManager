@@ -39,8 +39,11 @@ Edit `appsettings.Development.json`:
     "DefaultConnection": "Server=localhost,1433;Database=YoutubeManager;User Id=sa;Password=YourStrong!Password;TrustServerCertificate=true"
   },
   "Jwt": {
-    "Authority": "https://<your-supabase-project-ref>.supabase.co",
+    "Authority": "https://<your-supabase-project-ref>.supabase.co/auth/v1",
     "Audience": "authenticated"
+  },
+  "Cors": {
+    "AllowedOrigins": [ "http://localhost:5173" ]
   }
 }
 ```
@@ -55,7 +58,7 @@ dotnet ef database update --project server/Infrastructure --startup-project serv
 ```bash
 dotnet run --project server/Api
 ```
-API runs on `http://localhost:5000`.
+API runs on `http://localhost:5015`.
 
 ### 5. Configure the client
 ```bash
@@ -65,7 +68,7 @@ Edit `client/.env.local`:
 ```
 VITE_SUPABASE_URL=https://<your-project-ref>.supabase.co
 VITE_SUPABASE_ANON_KEY=<your-anon-key>
-VITE_API_BASE_URL=http://localhost:5000
+VITE_API_BASE_URL=http://localhost:5015
 ```
 
 ### 6. Start the client
